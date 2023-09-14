@@ -1,0 +1,22 @@
+/* styles.css */
+.title {
+    color: blue;
+    font-size: 24px;
+}
+
+.titleDiv {
+    background-color: bisque;
+}
+.formDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.down {
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    /* flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0; */
+}
