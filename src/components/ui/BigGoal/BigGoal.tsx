@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+import Card from '@/components/ui/Card'
 const BigGoal = (props) => {
   const [BigGoals, setGoals] = useState(props.BigGoals || []);
   const [isLoading, setLoading] = useState(true); // 로딩 상태를 나타내는 상태 변수
@@ -25,19 +25,19 @@ const BigGoal = (props) => {
 
   return (
     <div>
-      <h1>대목표 목록</h1>
+      {/* <h1>대목표 목록</h1> */}
       {isLoading ? (
         <p>Loading...</p> // 로딩 중일 때 표시할 내용
       ) : (
         <div className="goal-list">
           {BigGoals && BigGoals.length > 0 ? (
             BigGoals.map((goal) => (
-              <div key={goal.bigGoal_number} className="goal-card">
+              <Card key={goal.bigGoal_number} className="goal-card">
                 {/* 목표 정보 표시 */}
                 <h2>{goal.bigGoal_name}</h2>
                 <p>시작 날짜: {goal.bigGoal_startDate ? new Date(goal.bigGoal_startDate).toLocaleDateString() : '날짜 없음'}</p>
                 <p>종료 날짜: {goal.bigGoal_endDate ? new Date(goal.bigGoal_endDate).toLocaleDateString() : '날짜 없음'}</p>
-              </div>
+              </Card>
             ))
           ) : (
             <p>목록이 비어 있습니다.</p>
