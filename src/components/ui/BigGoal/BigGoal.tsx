@@ -1,11 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '@/components/ui/Card'
+import styles from './BigGoal.module.css'
+import Button from '@/components/ui/Button'
+import { MdDeleteForever } from 'react-icons/md'
+import { HiOutlinePencil  } from 'react-icons/hi'
+
 const BigGoal = (props) => {
   const [BigGoals, setGoals] = useState(props.BigGoals || []);
   const [isLoading, setLoading] = useState(true); // 로딩 상태를 나타내는 상태 변수
   const userId = '신짱구';
 
+  const cardFooter = (
+    <div className="flex justify-end">
+        <Button size="sm" className="ltr:mr-2 rtl:ml-2" variant="twoTone" icon={<HiOutlinePencil />}>
+            수정
+        </Button>
+        <Button size="sm" variant="twoTone" color="red-600" icon={<MdDeleteForever />}>
+            삭제
+        </Button>
+    </div>
+)
   useEffect(() => {
     async function fetchGoals() {
       try {
@@ -24,19 +39,20 @@ const BigGoal = (props) => {
   }, [props.BigGoals || []]); // props.BigGoals의 변경 감지
 
   return (
-    <div>
+    <div className={styles.BigGoalContainer}>
       {/* <h1>대목표 목록</h1> */}
       {isLoading ? (
         <p>Loading...</p> // 로딩 중일 때 표시할 내용
       ) : (
-        <div className="goal-list">
+        <div className={styles.goalListContainer}>
           {BigGoals && BigGoals.length > 0 ? (
             BigGoals.map((goal) => (
-              <Card key={goal.bigGoal_number} className="goal-card">
+              <Card key={goal.bigGoal_number} clickable className={styles.bigGoalCard} footer={cardFooter} header="Card Header">
                 {/* 목표 정보 표시 */}
-                <h2>{goal.bigGoal_name}</h2>
+                <h5>{goal.bigGoal_name}</h5>
                 <p>시작 날짜: {goal.bigGoal_startDate ? new Date(goal.bigGoal_startDate).toLocaleDateString() : '날짜 없음'}</p>
                 <p>종료 날짜: {goal.bigGoal_endDate ? new Date(goal.bigGoal_endDate).toLocaleDateString() : '날짜 없음'}</p>
+                
               </Card>
             ))
           ) : (

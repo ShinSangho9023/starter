@@ -3,6 +3,8 @@ import axios from 'axios';
 import BigGoal from '../BigGoal/BigGoal'; // BigGoal 컴포넌트를 import
 import GoalModal from '../Modal/Modal';//모달 컴포넌트를 import
 import BigGoalCount from '../BigGoalCount/BigGoalCount.jsx'
+import styles from './Modal&bigGoal.module.css'
+
 
 const ModalbigGoal = () => {
   const [BigGoals, setBigGoals] = useState([]);
@@ -32,9 +34,9 @@ const ModalbigGoal = () => {
   };
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <BigGoalCount BigGoals={BigGoals}/>
-      <h1>대목표 목록</h1>
+      <h1 className={styles.title}>대목표 목록</h1>
       <hr></hr>
       <GoalModal onSave={handleModalSave} />
       <BigGoal BigGoals={BigGoals}/>

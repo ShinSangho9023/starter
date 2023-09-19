@@ -1,0 +1,13 @@
+.BigGoalCount {
+    display: flex;
+    flex-wrap:nowrap;
+    justify-content:space-around;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.CountBox {
+
+    width: 250px;
+    height: 100px;
+}

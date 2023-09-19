@@ -1,5 +1,9 @@
 /* modal.module.css */
 
+.modalContainer {
+    display: flex;
+    justify-content: center;
+}
 .title {
     color: blue;
     font-size: 24px;
@@ -31,4 +35,9 @@
 
 .button {
     margin-top: auto;
+}
+
+.addButton {
+    margin-top: 60px;
+    margin-bottom: 20px;
 }

@@ -1,0 +1,26 @@
+.BigGoalContainer {
+    width: 80%;
+    height: 100vh;
+    align-self: center;
+    overflow:hidden
+}
+
+.goalListContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-content: flex-start;
+    flex-wrap: wrap;
+    flex: 1 0 auto;
+    height: 100%;
+    overflow: auto;
+
+}
+
+.bigGoalCard {
+    width: 300px;
+    height: 230px;
+    margin-block: 50px;
+    margin-left: 20px;
+    margin-right: 20px;
+}

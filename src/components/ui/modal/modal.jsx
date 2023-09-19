@@ -93,8 +93,8 @@ export default function GoalModal(props) {
   
 
   return (
-    <div>
-      <Button variant="solid" onClick={openModal}>
+    <div className={styles.modalContainer}>
+      <Button variant="solid" className={styles.addButton} onClick={openModal}>
         목표 등록
       </Button>
 
