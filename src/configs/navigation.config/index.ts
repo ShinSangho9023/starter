@@ -30,7 +30,7 @@ const navigationConfig: NavigationTree[] = [
     {
         key: 'goal',
         path: '/goal',
-        title: '목표',
+        title: '대목표',
         translateKey: 'nav.goal',
         icon: 'singleMenu',
         type: NAV_ITEM_TYPE_ITEM,

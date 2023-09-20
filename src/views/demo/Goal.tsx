@@ -6,9 +6,7 @@ import ModalbigGoal from '@/components/ui/ControllComponent/modal&bigGoal';
 
 export default function Goal() {
   return (
-    <div>
-      {/* <GoalModal/> */}
-      {/* <ApiTest/> */}
+    <div>   
       <ModalbigGoal></ModalbigGoal>
     </div>
   )

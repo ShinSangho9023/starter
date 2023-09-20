@@ -47,9 +47,9 @@ const BigGoal = (props) => {
         <div className={styles.goalListContainer}>
           {BigGoals && BigGoals.length > 0 ? (
             BigGoals.map((goal) => (
-              <Card key={goal.bigGoal_number} clickable className={styles.bigGoalCard} footer={cardFooter} header="Card Header">
+              <Card key={goal.bigGoal_number} clickable className={styles.bigGoalCard} footer={cardFooter} header={goal.bigGoal_name}>
                 {/* 목표 정보 표시 */}
-                <h5>{goal.bigGoal_name}</h5>
+                
                 <p>시작 날짜: {goal.bigGoal_startDate ? new Date(goal.bigGoal_startDate).toLocaleDateString() : '날짜 없음'}</p>
                 <p>종료 날짜: {goal.bigGoal_endDate ? new Date(goal.bigGoal_endDate).toLocaleDateString() : '날짜 없음'}</p>
                 
