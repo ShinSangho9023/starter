@@ -13,6 +13,8 @@ export default defineConfig({
     },
   }),
   dynamicImport()],
+
+  base: "/starter/",
   //여기가 프록시 설정 시작
   server: {
     proxy: { 
