@@ -60,7 +60,7 @@ const BigGoal = (props) => {
         console.log('경로 객체 값을 추가');
         return {
           key: goal.bigGoal_number,
-          path: `/${goal.user_id}/${goal.bigGoal_name}`,
+          path: '/user/bigGoal/:user_id/:bigGoal_name/:key',
           component: lazy(() => import('@/views/demo/BigGoalDashBoard')), // 라우트에 해당하는 컴포넌트를 여기에 추가
           authority: [],
         };
@@ -95,7 +95,7 @@ const BigGoal = (props) => {
                 footer={cardFooter}
                 header={goal.bigGoal_name}
               >
-                <Link to={`/${goal.user_id}/${goal.bigGoal_name}`}>
+                <Link to={`/user/bigGoal/${goal.user_id}/${goal.bigGoal_name}/${goal.bigGoal_number}`}>
                   {/* 목표 정보 표시 */}
                   <p>시작 날짜: {goal.bigGoal_startDate ? new Date(goal.bigGoal_startDate).toLocaleDateString() : '날짜 없음'}</p>
                   <p>종료 날짜: {goal.bigGoal_endDate ? new Date(goal.bigGoal_endDate).toLocaleDateString() : '날짜 없음'}</p>

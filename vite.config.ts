@@ -13,14 +13,12 @@ export default defineConfig({
     },
   }),
   dynamicImport()],
-
-  base: "/starter/",
   //여기가 프록시 설정 시작
   server: {
     proxy: { 
       '/api': {
         target: 'http://localhost:8888',
-        changeOrigin: true,
+        // changeOrigin: true,
         // rewrite: (path) => path.replace(/^\/api/, ''),
         // secure: false,
         // ws: true
@@ -34,6 +32,7 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: 'build'
+    outDir: '../src/main/resources/static',
+    assetsDir: './'
   }
 });
