@@ -13,6 +13,7 @@ export default defineConfig({
     },
   }),
   dynamicImport()],
+  //여기가 프록시 설정 시작
   server: {
     proxy: { 
       '/api': {
@@ -23,7 +24,7 @@ export default defineConfig({
         // ws: true
       }
     }
-  },
+  },// 끝
   assetsInclude: ['**/*.md'],
   resolve: {
     alias: {

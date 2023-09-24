@@ -4,15 +4,6 @@ import BigGoal from '../BigGoal/BigGoal'; // BigGoal 컴포넌트를 import
 import GoalModal from '../Modal/Modal';//모달 컴포넌트를 import
 import BigGoalCount from '../BigGoalCount/BigGoalCount.jsx'
 import styles from './Modal&bigGoal.module.css'
-import {
-  NAV_ITEM_TYPE_TITLE,
-  NAV_ITEM_TYPE_ITEM,
-  NAV_ITEM_TYPE_COLLAPSE
-} from '@/constants/navigation.constant'
-import navigationConfig from '@/configs/navigation.config/index';
-
-
-
 
 const ModalbigGoal = () => {
   const [BigGoals, setBigGoals] = useState([]);
@@ -25,6 +16,7 @@ const ModalbigGoal = () => {
         const response = await axios.get(`/api/BigGoals?userId=${userId}`);
         setBigGoals(response.data);
         console.log('부모의 값 :', response.data);
+        
       } catch (error) {
         console.error('오류 발생:', error);
       }
@@ -33,23 +25,7 @@ const ModalbigGoal = () => {
     fetchGoals();
   }, []);
 
-  const targetMenuItemKey = 'collapseMenu'; // 원하는 메뉴 항목의 키
-  // 선택한 메뉴 항목을 찾습니다.
-  const targetMenuItem = navigationConfig.find(item => item.key === targetMenuItemKey);
-  if (targetMenuItem) {
-    // 다른 배열을 map 메서드로 반복하여 새로운 서브 메뉴 항목을 추가합니다.
-    targetMenuItem.subMenu = BigGoals.map(item => ({
-      key: item.bigGoal_number,
-      path: `/new-sub-menu-${item.bigGoal_number}`,
-      title: item.bigGoal_name,
-      translateKey: `nav.collapseMenu.${item.bigGoal_number}`,
-      icon: '', // 아이콘 설정
-      type: NAV_ITEM_TYPE_ITEM,
-      authority: [], // 액세스 권한 설정
-      subMenu: [], // 서브 메뉴 항목이 없다면 빈 배열로 설정
-    }));
-  }
-
+  
   // 모달에서 목표를 저장할 때 호출되는 함수
   const handleModalSave = (newGoal) => {
     // 새로운 목표를 목록에 추가
