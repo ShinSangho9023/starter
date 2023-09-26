@@ -7,7 +7,6 @@ import { MdDeleteForever } from 'react-icons/md';
 import { HiOutlinePencil } from 'react-icons/hi';
 import { Link, useNavigate } from 'react-router-dom';
 import { protectedRoutes, getProtectedRoutes, updateProtectedRoutes  } from '@/configs/routes.config/routes.config';
-import BigGoalDashBoard from '../BigGoalDashBoard/BigGoalDashBoard.jsx';
 import { lazy } from 'react'
 
 
@@ -60,7 +59,7 @@ const BigGoal = (props) => {
         console.log('경로 객체 값을 추가');
         return {
           key: goal.bigGoal_number,
-          path: '/user/bigGoal/:user_id/:bigGoal_name/:key',
+          path: '/user/bigGoal/:user_id/:bigGoal_name/:bigGoal_number',
           component: lazy(() => import('@/views/demo/BigGoalDashBoard')), // 라우트에 해당하는 컴포넌트를 여기에 추가
           authority: [],
         };
