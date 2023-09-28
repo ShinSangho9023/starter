@@ -18,11 +18,10 @@
 .dashBoardButtom{
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-content: flex-start;
-    flex-wrap: wrap;
+
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .dashBoardTopLeft {
@@ -55,6 +54,7 @@
 }
 
 .smallGoalTitle {
+    flex: 1 1 auto;
     margin-top: 20px;
 }
 

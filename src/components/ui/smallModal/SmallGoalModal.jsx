@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { Button, Input, } from '@/components/ui';
-import styles from './modal.module.css'
+import styles from './SmallGoalModal.module.css'
 import DatePicker from '@/components/ui/DatePicker'
 
 const modalStyle = {

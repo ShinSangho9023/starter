@@ -1,0 +1,16 @@
+.smallGoalCard {
+    width: 20%;
+    height: 100px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    border: 1px solid #E5E7EB;
+    padding: 1.25rem;
+    border-radius: 10px;
+}
+.smallGoalCard div p {
+    font-size: 20px; /* 텍스트의 크기를 16px로 설정 */
+    color: black;
+  }

@@ -1,30 +1,43 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios';
 import Card from '@/components/ui/Card'
-import styles from './BigGoalCount.module.css'
+import styles from './SmallGoalCount.module.css'
 
-export default function smallGoalCount(props) {
+export default function SmallGoalCount(props) {
 
-    const [SmallGoalsCount, setSmallGoalsCount] = useState(props, []);
-    const [isLoading, setLoading] = useState(true); // 로딩 상태를 나타내는 상태 변수
-    const userId = '신짱구';
+    const [GoalsCount, setGoalsCount] = useState();
+    const number = props.bigGoal_number;
 
+    useEffect(() => {
+        async function fetchGoals() {
+            try {
+                const response = await axios.get(`/api/SmallGoalCount?number=${number}`);
+                setGoalsCount(response.data);
+                console.log(response.data);
+                console.log(GoalsCount);
+            } catch (error) {
+                console.error('오류 발생:', error);
+                setLoading(false); // 오류 발생 시에도 로딩 상태 변경
+            }
+        }
+        fetchGoals();
+    }, [props.SmallGoals || []])
 
-
-
-
-    let completed_count
-
-
-    
     return (
         <>
-            <Card>
-                <span>완료</span> <span>{ }개</span><br></br>
-                <span>진행</span> <span>{ }개</span><br></br>
-                <span>예정</span> <span>{ }개</span><br></br>
-            </Card>
-
+            <div className={styles.smallGoalCard}>
+                <div>
+                    <p>완료:</p>
+                    <p>진행:</p>
+                    <p>예정:</p>
+                </div>
+                <div>
+                    <p>{GoalsCount && GoalsCount.completed_count !== undefined ? GoalsCount.completed_count : 0}개</p>
+                    <p>{GoalsCount && GoalsCount.ongoing_count !== undefined ? GoalsCount.ongoing_count : 0}개</p>
+                    <p>{GoalsCount && GoalsCount.upComingGoal_count !== undefined ? GoalsCount.upComingGoal_count : 0}개</p>
+                </div>
+            </div>
         </>
-    )
+    );
+
 }

@@ -8,7 +8,10 @@ import Button from '@/components/ui/Button'
 import { MdDeleteForever } from 'react-icons/md'
 import { HiOutlinePencil } from 'react-icons/hi'
 import Progress from '@/components/ui/Progress'
-import SmallGoalModal from '../../components/ui/Modal/SmallGoalModal.jsx'
+import SmallGoalModal from '../../components/ui/smallModal/SmallGoalModal.jsx'
+import SmallGoalCount from '../../components/ui/SmallGoalCount/SmallGoalCount.jsx'
+
+
 
 export default function BigGoalDashBoard() {
     const [SmallGoals, setSmallGoals] = useState([])
@@ -75,7 +78,7 @@ export default function BigGoalDashBoard() {
                 setLoading(false) // 오류 발생 시에도 로딩 상태 변경
             }
         }
-        fetchGoals()
+        fetchGoals();
     }, [])
 
     return (
@@ -110,6 +113,10 @@ export default function BigGoalDashBoard() {
                 <div className={styles.smallGoalTitle}>
                     <h3>소목표</h3>
                     <hr></hr>
+                    <SmallGoalCount 
+                        SmallGoals={SmallGoals}
+                        bigGoal_number={bigGoal_number}
+                    />
                     <br></br>
                     <SmallGoalModal
                         onSave={handleSmallModalSave}
@@ -155,6 +162,10 @@ export default function BigGoalDashBoard() {
                         </div>
                     )}
                 </div>
+
+                                
+
+
             </div>
         </div>
     )
