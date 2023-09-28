@@ -29,7 +29,7 @@ export default function SmallGoalCount(props) {
                 <div>
                     <p>완료:</p>
                     <p>진행:</p>
-                    <p>예정:</p>
+                    <p>예정된 소목표:</p>
                 </div>
                 <div>
                     <p>{GoalsCount && GoalsCount.completed_count !== undefined ? GoalsCount.completed_count : 0}개</p>

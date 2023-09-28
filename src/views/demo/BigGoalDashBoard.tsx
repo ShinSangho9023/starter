@@ -10,8 +10,8 @@ import { HiOutlinePencil } from 'react-icons/hi'
 import Progress from '@/components/ui/Progress'
 import SmallGoalModal from '../../components/ui/smallModal/SmallGoalModal.jsx'
 import SmallGoalCount from '../../components/ui/SmallGoalCount/SmallGoalCount.jsx'
-
-
+import Dday from '../../components/ui/Dday/Dday.jsx'
+import SmallDday from '../../components/ui/SmallDday/SmallDday.jsx'
 
 export default function BigGoalDashBoard() {
     const [SmallGoals, setSmallGoals] = useState([])
@@ -20,7 +20,7 @@ export default function BigGoalDashBoard() {
     const userId = '신짱구'
 
     // useParams 훅을 사용하여 URL의 경로 매개변수를 가져옴
-    const { user_id, bigGoal_name, bigGoal_number } = useParams()
+    const { user_id, bigGoal_name, bigGoal_number, bigGoal_state } = useParams()
 
     // 모달에서 목표를 저장할 때 호출되는 함수
     const handleSmallModalSave = (newGoal) => {
@@ -93,9 +93,10 @@ export default function BigGoalDashBoard() {
                             className={styles.bigGoalName}
                             headerBorder={false}
                         >
+                            <p>{bigGoal_state}</p>
                             <br />
                             <br />
-                            <h1>{bigGoal_name}</h1>
+                            <span className={styles.name}>{bigGoal_name}</span><span className={styles.nameday}><Dday bigGoal_number={bigGoal_number}/></span>
                             <br />
                             <Progress percent={30} />
                         </Card>
@@ -138,6 +139,7 @@ export default function BigGoalDashBoard() {
                                         footer={cardFooter}
                                     >
                                         {/* 목표 정보 표시 */}
+                                        <p>{goal.smallGoal_check}</p>
                                         <p>
                                             시작 날짜:{' '}
                                             {goal.smallGoal_startDate
@@ -154,6 +156,7 @@ export default function BigGoalDashBoard() {
                                                   ).toLocaleDateString()
                                                 : '날짜 없음'}
                                         </p>
+                                        <SmallDday smallGoal_number={goal.smallGoal_number}/>
                                     </Card>
                                 ))
                             ) : (
