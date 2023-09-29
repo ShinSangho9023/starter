@@ -13,17 +13,30 @@ import {
 } from '@/configs/routes.config/routes.config'
 import { lazy } from 'react'
 import Dday from '../Dday/Dday.jsx'
+import BigGoalModal from '../UpDateModal/BigGoalModal/BigGoalModal.jsx'
 
 const BigGoal = (props) => {
     // 상태 변수 정의
     const [BigGoals, setGoals] = useState(props.BigGoals || [])
     const [isLoading, setLoading] = useState(true) // 로딩 상태를 나타내는 상태 변수
     const userId = '신짱구'
-    const navigate = useNavigate()
+    const [BigGoalId, setBigGoalId] = useState()
+    // 상태로 모달 열기/닫기 상태 관리
+    const [isOpen, setIsOpen] = useState(false)
 
-    const handleButtonClick = () => {
-        // 버튼 클릭 시 다른 경로로 이동
-        navigate('/single-menu-view')
+    // 수정 버튼 클릭 시 모달 열기
+    const handleButtonClick = (BigGoalId) => {
+        if (!isOpen) {
+            setIsOpen(true)
+            setBigGoalId(BigGoalId)
+            console.log('모달 열림 빅골')
+        }
+    }
+
+    // 모달 닫기 함수
+    const closeModal = () => {
+        setIsOpen(false)
+        console.log('모달 닫힘 빅골')
     }
 
     const handleDeleteClick = async (BigGoalId) => {
@@ -43,27 +56,28 @@ const BigGoal = (props) => {
     }
 
     const cardFooter = (BigGoalId) => (
-      <div className="flex justify-end">
-          <Button
-              size="sm"
-              className="ltr:mr-2 rtl:ml-2"
-              variant="twoTone"
-              icon={<HiOutlinePencil />}
-              onClick={handleButtonClick}
-          >
-              수정
-          </Button>
-          <Button
-              size="sm"
-              variant="twoTone"
-              color="red-600"
-              icon={<MdDeleteForever />}
-              onClick={() => handleDeleteClick(BigGoalId)}
-          >
-              삭제
-          </Button>
-      </div>
-  );
+        <div className="flex justify-end">
+            {/* 수정 버튼 */}
+            <Button
+                size="sm"
+                className="ltr:mr-2 rtl:ml-2"
+                variant="twoTone"
+                icon={<HiOutlinePencil />}
+                onClick={() => handleButtonClick(BigGoalId)}
+            >
+                수정
+            </Button>
+            <Button
+                size="sm"
+                variant="twoTone"
+                color="red-600"
+                icon={<MdDeleteForever />}
+                onClick={() => handleDeleteClick(BigGoalId)}
+            >
+                삭제
+            </Button>
+        </div>
+    )
 
     // 대목표 불러오기
     useEffect(() => {
@@ -151,6 +165,15 @@ const BigGoal = (props) => {
                         <p>목록이 비어 있습니다.</p>
                     )}
                 </div>
+            )}
+            {/* BigGoalModal 컴포넌트를 조건부 렌더링 */}
+            {isOpen && (
+                <BigGoalModal
+                    isOpen={isOpen}
+                    closeModal={closeModal}
+                    BigGoalId={BigGoalId}
+                    props={props}
+                />
             )}
         </div>
     )
