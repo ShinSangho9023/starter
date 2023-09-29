@@ -2,10 +2,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 export default function SmallDday(props) {
-    console.log(props);
     const [Dday, setDday] = useState("");
     const smallGoal_number = props.smallGoal_number;
-    console.log(smallGoal_number);
+     
     useEffect(() => {
         async function fetchDday() {
             const response = await axios.get(`/api/SmallDday?smallGoal_number=${smallGoal_number}`);

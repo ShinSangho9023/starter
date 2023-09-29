@@ -2,10 +2,8 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 export default function Dday(props) {
-    console.log(props);
     const [Dday, setDday] = useState("");
     const bigGoal_number = props.bigGoal_number;
-    console.log(bigGoal_number);
     useEffect(() => {
         async function fetchDday() {
             const response = await axios.get(`/api/Dday?bigGoal_number=${bigGoal_number}`);

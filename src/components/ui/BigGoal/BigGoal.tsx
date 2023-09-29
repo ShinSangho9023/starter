@@ -45,18 +45,16 @@ const BigGoal = (props) => {
     </div>
   );
 
+  // 대목표 불러오기
   useEffect(() => {
     async function fetchGoals() {
       try {
         const response = await axios.get(`/api/BigGoals?userId=${userId}`);
         setGoals(response.data);
         setLoading(false); // 데이터 로딩이 끝났음을 표시
-        console.log('부모에서 넘어온 컴포넌트 값', props.BigGoals);
-        console.log('자식에서 서버에서 넘어온 값 :', response.data);
         
        // BigGoals를 사용하여 protectedRoutes 업데이트
        const newProtectedRoutes = BigGoals.map((goal) => {
-        console.log('경로 객체 값을 추가');
         return {
           key: goal.bigGoal_number,
           path: '/user/bigGoal/:user_id/:bigGoal_name/:bigGoal_number/:bigGoal_state',
@@ -68,7 +66,6 @@ const BigGoal = (props) => {
       const updatedProtectedRoutes = [...protectedRoutes, ...newProtectedRoutes];
       // protectedRoutes 업데이트
       updateProtectedRoutes(updatedProtectedRoutes);
-      console.log('새로운 경로 객체 :', updatedProtectedRoutes);
       } catch (error) {
         console.error('오류 발생:', error);
         setLoading(false); // 오류 발생 시에도 로딩 상태 변경

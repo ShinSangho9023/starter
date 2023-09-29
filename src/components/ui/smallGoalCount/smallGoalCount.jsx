@@ -13,8 +13,6 @@ export default function SmallGoalCount(props) {
             try {
                 const response = await axios.get(`/api/SmallGoalCount?number=${number}`);
                 setGoalsCount(response.data);
-                console.log(response.data);
-                console.log(GoalsCount);
             } catch (error) {
                 console.error('오류 발생:', error);
                 setLoading(false); // 오류 발생 시에도 로딩 상태 변경

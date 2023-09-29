@@ -80,14 +80,12 @@ export default function BigGoalModal(props) {
     try {
       // Axios를 사용하여 데이터를 전송
       const response = await axios.post('/api/goal', formData);
-      console.log('전송 결과:', response.data);
 
       // 목표 저장 후 onSave 콜백 호출
       props.onSave(formData);
     } catch (error) {
-      console.error('전송 오류:', error);
+      console.error('오류 발생:', error);
     }
-    console.log(formData); // 업데이트된 상태를 확인하기 위해 이곳에서 확인
     closeModal(); // 모달 닫기
   };
 

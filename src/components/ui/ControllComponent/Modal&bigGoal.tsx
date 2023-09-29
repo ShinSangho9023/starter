@@ -15,8 +15,6 @@ const ModalbigGoal = () => {
       try {
         const response = await axios.get(`/api/BigGoals?userId=${userId}`);
         setBigGoals(response.data);
-        console.log('부모의 값 :', response.data);
-        
       } catch (error) {
         console.error('오류 발생:', error);
       }
@@ -30,8 +28,6 @@ const ModalbigGoal = () => {
   const handleModalSave = (newGoal) => {
     // 새로운 목표를 목록에 추가
     const newBigGoals = [...BigGoals, newGoal]; // 새로운 배열 생성
-    console.log("부모 컴포넌트 리렌더링 확인", newGoal);
-    console.log("부모 컴포넌트 목표 리스트 확인", newBigGoals);
     setBigGoals(newBigGoals); // 상태 업데이트
   };
 
