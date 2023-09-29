@@ -17,7 +17,21 @@ export default function SmallGoal(props) {
         navigate('/single-menu-view');
     };
 
-    const cardFooter = (
+    const handleDeleteClick = async (smallGoalId) => {
+        try {
+            // 삭제 요청을 서버에 보냄 (smallGoalId는 삭제할 카드의 고유 식별자)
+            await axios.delete(`/api/user/smallGoals/delete/${smallGoalId}`);
+
+            // 삭제한 카드를 상태에서 제거
+            const updatedSmallGoals = SmallGoals.filter((goal) => goal.smallGoal_number !== smallGoalId);
+            setSmallGoals(updatedSmallGoals);
+            props.onSave(SmallGoals);
+        } catch (error) {
+            console.error('오류 발생:', error);
+        }
+    };
+
+    const cardFooter = (smallGoalId) => (
         <div className="flex justify-end">
             <Button
                 size="sm"
@@ -33,12 +47,14 @@ export default function SmallGoal(props) {
                 variant="twoTone"
                 color="red-600"
                 icon={<MdDeleteForever />}
-                onClick={handleButtonClick}
+                onClick={() => handleDeleteClick(smallGoalId)}
             >
                 삭제
             </Button>
         </div>
     );
+
+    
     
     // 소목표가 추가 될 때마다 다시 한번 소목표를 불러옴.
     useEffect(() => {
@@ -70,7 +86,7 @@ export default function SmallGoal(props) {
                                 key={`goal-${index}`}
                                 className={styles.smallGoalCard}
                                 header={goal.smallGoal_name}
-                                footer={cardFooter}
+                                footer={cardFooter(goal.smallGoal_number)} // 카드의 고유 식별자를 전달
                             >
                                 {/* 목표 정보 표시 */}
                                 <p>{goal.smallGoal_check}</p>

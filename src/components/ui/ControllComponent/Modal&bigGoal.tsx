@@ -37,7 +37,7 @@ const ModalbigGoal = () => {
       <h1 className={styles.title}>대목표 목록</h1>
       <hr></hr>
       <BigGoalModal onSave={handleModalSave} />
-      <BigGoal BigGoals={BigGoals}/>
+      <BigGoal BigGoals={BigGoals} onSave={handleModalSave}/>
     </div>
   );
 };

@@ -91,7 +91,7 @@ export default function BigGoalDashBoard() {
                     />
                 </div>
 
-                <SmallGoal SmallGoals={SmallGoals} user_id={user_id} bigGoal_name={bigGoal_name} bigGoal_number={bigGoal_number}/>
+                <SmallGoal SmallGoals={SmallGoals} user_id={user_id} bigGoal_name={bigGoal_name} bigGoal_number={bigGoal_number} onSave={handleSmallModalSave}/>
             </div>
         </div>
     );
