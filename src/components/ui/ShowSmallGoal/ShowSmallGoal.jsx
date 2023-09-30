@@ -1,34 +1,51 @@
 import React, { useState, useEffect } from 'react';
 import { MdDeleteForever } from 'react-icons/md';
 import { HiOutlinePencil } from 'react-icons/hi';
+import { AiOutlineInfoCircle } from "react-icons/ai";
 import Button from '@/components/ui/Button';
 import axios from 'axios';
 import styles from './SmallGoal.module.css'
 import Card from '@/components/ui/Card'
 import SmallDday from '../ShowSmallGoalDday/ShowSmallGoalDday'
 import SmallGoalModal from '../UpDateModal/UpdateSmallGoalModal/UpdateSmallGoalModal'
-
+import SmallGoalInfoModal from '../SmallGoalInfoModal/SmallGoalInfoModal'
 
 export default function SmallGoal(props) {
     const [SmallGoals, setSmallGoals] = useState(props.SmallGoals || []);
     const [isLoading, setLoading] = useState(true);
     const [SmallGoalId, setSmallGoalId] = useState();
-    // 상태로 모달 열기/닫기 상태 관리
+    // 상태로 수정 모달 열기/닫기 상태 랜더링 관리
     const [isOpen, setIsOpen] = useState(false)
+    // 정보 모달 랜더링 관리
+    const [openinfo, setopeninfo] = useState(false);
 
     // 수정 버튼 클릭 시 모달 열기
     const handleButtonClick = (smallGoalId) => {
         if (!isOpen) {
-            setIsOpen(true)
-            setSmallGoalId(smallGoalId)
+            setIsOpen(true);
+            setSmallGoalId(smallGoalId);
         }
     }
+
+    // 카드를 호버할 때 모달 열기
+    const handleModalHover = (smallGoalId) => {
+        if (!openinfo) {
+            setopeninfo(true);
+            console.log("정보 모달 함수 온");
+            // 여기에서 smallGoalId 또는 다른 필요한 작업을 수행할 수 있습니다.
+        }
+    }
+
+    console.log("정보 모달 블룬", openinfo);
 
     // 모달 닫기 함수
     const closeModal = () => {
         setIsOpen(false)
     }
 
+    const closeinfoModal = () => {
+        setopeninfo(false)
+    }
 
     const handleDeleteClick = async (smallGoalId) => {
         try {
@@ -45,7 +62,17 @@ export default function SmallGoal(props) {
     };
 
     const cardFooter = (smallGoalId) => (
-        <div className="flex justify-end">
+        <div className="flex justify-center space-x-2">
+            <Button
+                size="sm"
+                variant="twoTone"
+                color="green-600"
+                icon={<AiOutlineInfoCircle />}
+                onClick={() => handleModalHover(smallGoalId)}
+            >
+                정보
+            </Button>
+
             <Button
                 size="sm"
                 className="ltr:mr-2 rtl:ml-2"
@@ -55,6 +82,7 @@ export default function SmallGoal(props) {
             >
                 수정
             </Button>
+
             <Button
                 size="sm"
                 variant="twoTone"
@@ -95,6 +123,7 @@ export default function SmallGoal(props) {
                     {SmallGoals && SmallGoals.length > 0 ? (
                         SmallGoals.map((goal, index) => (
                             <Card
+
                                 key={`goal-${index}`}
                                 className={styles.smallGoalCard}
                                 header={goal.smallGoal_name}
@@ -126,14 +155,22 @@ export default function SmallGoal(props) {
                     )}
                 </div>
             )}
-             {/* SmallGoalModal 컴포넌트를 조건부 렌더링 */}
-             {isOpen && (
+            {/* 수정하는 SmallGoalModal 컴포넌트를 조건부 렌더링 */}
+            {isOpen && (
                 <SmallGoalModal
                     isOpen={isOpen}
                     closeModal={closeModal}
                     SmallGoalId={SmallGoalId}
                     bigGoal_number={props.bigGoal_number}
                     props={props}
+                />
+            )}
+
+            {/* 정보를 보여주는 정보 인포 컴포넌트를 조건부 렌더링 */}
+            {openinfo && (
+                <SmallGoalInfoModal
+                    isOpen={openinfo}
+                    closeModal={closeinfoModal}
                 />
             )}
         </div>

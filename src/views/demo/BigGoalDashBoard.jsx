@@ -61,10 +61,21 @@ export default function BigGoalDashBoard() {
                             <p>{bigGoal_state}</p>
                             <br />
                             <br />
-                            <span className={styles.name}>{bigGoal_name}</span><span className={styles.nameday}><OneBigGoalDday bigGoal_number={bigGoal_number}/></span>
+                            <span className={styles.name}>{bigGoal_name}</span><span className={styles.nameday}><OneBigGoalDday bigGoal_number={bigGoal_number} /></span>
                             <br />
                             <Progress percent={30} />
                         </Card>
+                    </div>
+                    {/* 소목표 불러오는 곳 */}
+                    <div className={styles.smallGoalTitle}>
+                        <h3>소목표</h3>
+                        <hr></hr>
+                        <SmallGoalCount
+                            SmallGoals={SmallGoals}
+                            bigGoal_number={bigGoal_number}
+                        />
+                        <br></br>
+
                     </div>
                 </div>
 
@@ -75,22 +86,12 @@ export default function BigGoalDashBoard() {
             </div>
 
             <div className={styles.dashBoardButtom}>
-                {/* 소목표 불러오는 곳 */}
-                <div className={styles.smallGoalTitle}>
-                    <h3>소목표</h3>
-                    <hr></hr>
-                    <SmallGoalCount
-                        SmallGoals={SmallGoals}
-                        bigGoal_number={bigGoal_number}
-                    />
-                    <br></br>
-                    <SmallGoalModal
-                        onSave={handleSmallModalSave}
-                        bigGoal_number={bigGoal_number}
-                    />
-                </div>
+                <SmallGoalModal
+                    onSave={handleSmallModalSave}
+                    bigGoal_number={bigGoal_number}
+                />
 
-                <SmallGoal SmallGoals={SmallGoals} bigGoal_number={bigGoal_number} onSave={handleSmallModalSave}/>
+                <SmallGoal SmallGoals={SmallGoals} bigGoal_number={bigGoal_number} onSave={handleSmallModalSave} />
             </div>
         </div>
     );

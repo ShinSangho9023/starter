@@ -1,0 +1,12 @@
+.progresscircle {
+    display: flex; /* Flex 컨테이너로 설정하여 수평 가운데 정렬합니다. */
+    justify-content: center; /* 수평 가운데 정렬 */
+    flex-direction: column;
+    align-items: center; /* 수직 가운데 정렬 */
+}
+
+.container{
+    display: flex; /* Flex 컨테이너로 설정하여 수평 가운데 정렬합니다. */
+    justify-content: center; /* 수평 가운데 정렬 */
+    align-items: center; /* 수직 가운데 정렬 */
+}
