@@ -12,15 +12,15 @@ import {
     updateProtectedRoutes,
 } from '@/configs/routes.config/routes.config'
 import { lazy } from 'react'
-import Dday from '../Dday/Dday.jsx'
-import BigGoalModal from '../UpDateModal/BigGoalModal/BigGoalModal.jsx'
+import Dday from '../ShowBigGoalDday/ShowBigGoalDday.jsx'
+import BigGoalModal from '../UpDateModal/UpdateBigGoalModal/UpdateBigGoalModal.jsx'
 
 const BigGoal = (props) => {
     // 상태 변수 정의
     const [BigGoals, setGoals] = useState(props.BigGoals || [])
     const [isLoading, setLoading] = useState(true) // 로딩 상태를 나타내는 상태 변수
     const userId = '신짱구'
-    const [BigGoalId, setBigGoalId] = useState()
+    const [BigGoalId, setBigGoalId] = useState();
     // 상태로 모달 열기/닫기 상태 관리
     const [isOpen, setIsOpen] = useState(false)
 
@@ -29,14 +29,12 @@ const BigGoal = (props) => {
         if (!isOpen) {
             setIsOpen(true)
             setBigGoalId(BigGoalId)
-            console.log('모달 열림 빅골')
         }
     }
 
     // 모달 닫기 함수
     const closeModal = () => {
         setIsOpen(false)
-        console.log('모달 닫힘 빅골')
     }
 
     const handleDeleteClick = async (BigGoalId) => {
@@ -155,7 +153,7 @@ const BigGoal = (props) => {
                                     </p>
                                     <p>
                                         <Dday
-                                            bigGoal_number={goal.bigGoal_number}
+                                            bigGoal_number={goal.bigGoal_number} props={props}
                                         />
                                     </p>
                                 </Link>
@@ -166,8 +164,8 @@ const BigGoal = (props) => {
                     )}
                 </div>
             )}
-            {/* BigGoalModal 컴포넌트를 조건부 렌더링 */}
-            {isOpen && (
+             {/* BigGoalModal 컴포넌트를 조건부 렌더링 */}
+             {isOpen && (
                 <BigGoalModal
                     isOpen={isOpen}
                     closeModal={closeModal}

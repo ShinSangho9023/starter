@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import BigGoal from '../BigGoal/BigGoal'; // BigGoal 컴포넌트를 import
-import BigGoalModal from '../Modal/Modal';//모달 컴포넌트를 import
-import BigGoalCount from '../BigGoalCount/BigGoalCount.jsx'
+import BigGoal from '../ShowBigGoal/ShowBigGoal'; // BigGoal 컴포넌트를 import
+import BigGoalModal from '../InsertBigGoalModal/InsertBigGoalModal';//모달 컴포넌트를 import
+import BigGoalCount from '../ShowBigGoalCount/ShowBigGoalCount.jsx'
 import styles from './Modal&bigGoal.module.css'
 
 const ModalbigGoal = () => {

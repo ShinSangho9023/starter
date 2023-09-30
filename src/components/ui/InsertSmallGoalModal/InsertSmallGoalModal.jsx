@@ -35,7 +35,6 @@ export default function SmallGoalModal(props) {
     smallGoal_name: '',
     smallGoal_startDate: '',
     smallGoal_endDate: '',
-    user_id: '신짱구',
     bigGoal_number: props.bigGoal_number
   });
 

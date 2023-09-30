@@ -1,5 +1,5 @@
 
-import ModalbigGoal from '@/components/ui/ControllComponent/modal&bigGoal';
+import ModalbigGoal from '../../components/ui/ShowBigGoalDsahBoard/ShowBigGoalDsahBoard'
 
 export default function Goal() {
   return (

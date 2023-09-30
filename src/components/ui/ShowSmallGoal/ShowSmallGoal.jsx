@@ -5,17 +5,30 @@ import Button from '@/components/ui/Button';
 import axios from 'axios';
 import styles from './SmallGoal.module.css'
 import Card from '@/components/ui/Card'
-import SmallDday from '../SmallDday/SmallDday'
+import SmallDday from '../ShowSmallGoalDday/ShowSmallGoalDday'
+import SmallGoalModal from '../UpDateModal/UpdateSmallGoalModal/UpdateSmallGoalModal'
+
 
 export default function SmallGoal(props) {
     const [SmallGoals, setSmallGoals] = useState(props.SmallGoals || []);
     const [isLoading, setLoading] = useState(true);
-    
-    
-    const handleButtonClick = () => {
-        // 버튼 클릭 시 다른 경로로 이동
-        navigate('/single-menu-view');
-    };
+    const [SmallGoalId, setSmallGoalId] = useState();
+    // 상태로 모달 열기/닫기 상태 관리
+    const [isOpen, setIsOpen] = useState(false)
+
+    // 수정 버튼 클릭 시 모달 열기
+    const handleButtonClick = (smallGoalId) => {
+        if (!isOpen) {
+            setIsOpen(true)
+            setSmallGoalId(smallGoalId)
+        }
+    }
+
+    // 모달 닫기 함수
+    const closeModal = () => {
+        setIsOpen(false)
+    }
+
 
     const handleDeleteClick = async (smallGoalId) => {
         try {
@@ -38,7 +51,7 @@ export default function SmallGoal(props) {
                 className="ltr:mr-2 rtl:ml-2"
                 variant="twoTone"
                 icon={<HiOutlinePencil />}
-                onClick={handleButtonClick}
+                onClick={() => handleButtonClick(smallGoalId)}
             >
                 수정
             </Button>
@@ -54,18 +67,17 @@ export default function SmallGoal(props) {
         </div>
     );
 
-    
-    
+
+
     // 소목표가 추가 될 때마다 다시 한번 소목표를 불러옴.
     useEffect(() => {
         async function fetchGoals() {
             try {
                 const response = await axios.get(
-                    `/api/user/smallGoals?user_id=${props.user_id}&bigGoal_name=${props.bigGoal_name}&bigGoal_number=${props.bigGoal_number}`
+                    `/api/user/smallGoals?bigGoal_number=${props.bigGoal_number}`
                 );
                 setSmallGoals(response.data);
                 setLoading(false); // 데이터 로딩이 끝났음을 표시
-                console.log('서버로 소목표 값을 가져오는 걸 확인');
             } catch (error) {
                 console.error('오류 발생:', error);
                 setLoading(false); // 오류 발생 시에도 로딩 상태 변경
@@ -106,13 +118,23 @@ export default function SmallGoal(props) {
                                         ).toLocaleDateString()
                                         : '날짜 없음'}
                                 </p>
-                                <SmallDday smallGoal_number={goal.smallGoal_number} />
+                                <SmallDday smallGoal_number={goal.smallGoal_number} props={props} />
                             </Card>
                         ))
                     ) : (
                         <p>목록이 비어 있습니다.</p>
                     )}
                 </div>
+            )}
+             {/* SmallGoalModal 컴포넌트를 조건부 렌더링 */}
+             {isOpen && (
+                <SmallGoalModal
+                    isOpen={isOpen}
+                    closeModal={closeModal}
+                    SmallGoalId={SmallGoalId}
+                    bigGoal_number={props.bigGoal_number}
+                    props={props}
+                />
             )}
         </div>
     );

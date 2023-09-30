@@ -27,10 +27,11 @@ Modal.setAppElement('#root');
 export default function BigGoalModal(props) {
   // 모달의 열고 닫는 상태를 관리
   const [isOpen, setIsOpen] = useState(props.isOpen || false);
+    
 
   // 폼 데이터 상태
   const [formData, setFormData] = useState({
-    bigGoal_name: '',
+    bigGoal_name: null,
     bigGoal_startDate: '',
     bigGoal_endDate: '',
     user_id: '신짱구',
@@ -62,15 +63,10 @@ export default function BigGoalModal(props) {
     }));
   };
 
-  // 모달 열기
-  const openModal = () => {
-    setIsOpen(true);
-  };
-
   // 모달 닫기
   const closeModal = () => {
     setIsOpen(false);
-    console.log("모달 닫힘 자식");
+    props.closeModal();
   };
 
   // 전송 버튼 클릭 시 처리
@@ -87,17 +83,12 @@ export default function BigGoalModal(props) {
     } catch (error) {
       console.error('오류 발생:', error);
     }
-    closeModal(); // 모달 닫기
     props.closeModal(); // 부모 값 변경
+    closeModal(); // 모달 닫기
   };
 
   return (
     <div>
-      {/* 모달 열기 버튼을 원하는 곳에 배치할 수 있습니다. */}
-      <Button variant="solid" onClick={openModal}>
-        대목표 수정
-      </Button>
-
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}

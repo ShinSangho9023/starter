@@ -4,11 +4,11 @@ import axios from 'axios'
 import styles from './BigGoalDashBoard.module.css'
 import { Card } from '@/components/ui'
 import Progress from '@/components/ui/Progress'
-import Dday from '../../components/ui/Dday/Dday.jsx'
-import SmallGoalCount from '../../components/ui/SmallGoalCount/SmallGoalCount.jsx'
-import SmallGoalModal from '../../components/ui/smallModal/SmallGoalModal.jsx'
-import SmallGoal from '../../components/ui/SmallGoal/SmallGoal.jsx'
-
+import Dday from '../../components/ui/ShowBigGoalDday/ShowBigGoalDday'
+import SmallGoalCount from '../../components/ui/ShowSmallGoalCount/ShowSmallGoalCount'
+import SmallGoalModal from '../../components/ui/InsertSmallGoalModal/InsertSmallGoalModal.jsx'
+import SmallGoal from '../../components/ui/ShowSmallGoal/ShowSmallGoal'
+import OneBigGoalDday from '../../components/ui/ShowBigGoalDday/OneBigGoalDday'
 export default function BigGoalDashBoard() {
     const [SmallGoals, setSmallGoals] = useState([]);
     const [isLoading, setLoading] = useState(true); // 추가: 데이터 로딩 상태
@@ -21,7 +21,6 @@ export default function BigGoalDashBoard() {
         // 새로운 목표를 목록에 추가
         const newSmallGoals = [...SmallGoals, newGoal]; // 새로운 배열 생성
         setSmallGoals(newSmallGoals); // 상태 업데이트
-        console.log('대쉬보드의 handleSmallModalSave 업데이트 확인');
     }
 
 
@@ -35,7 +34,7 @@ export default function BigGoalDashBoard() {
         async function fetchGoals() {
             try {
                 const response = await axios.get(
-                    `/api/user/smallGoals?user_id=${user_id}&bigGoal_name=${bigGoal_name}&bigGoal_number=${bigGoal_number}`
+                    `/api/user/smallGoals?bigGoal_number=${bigGoal_number}`
                 );
                 setSmallGoals(response.data);
                 setLoading(false); // 데이터 로딩이 끝났음을 표시
@@ -62,7 +61,7 @@ export default function BigGoalDashBoard() {
                             <p>{bigGoal_state}</p>
                             <br />
                             <br />
-                            <span className={styles.name}>{bigGoal_name}</span><span className={styles.nameday}><Dday bigGoal_number={bigGoal_number}/></span>
+                            <span className={styles.name}>{bigGoal_name}</span><span className={styles.nameday}><OneBigGoalDday bigGoal_number={bigGoal_number}/></span>
                             <br />
                             <Progress percent={30} />
                         </Card>
@@ -91,7 +90,7 @@ export default function BigGoalDashBoard() {
                     />
                 </div>
 
-                <SmallGoal SmallGoals={SmallGoals} user_id={user_id} bigGoal_name={bigGoal_name} bigGoal_number={bigGoal_number} onSave={handleSmallModalSave}/>
+                <SmallGoal SmallGoals={SmallGoals} bigGoal_number={bigGoal_number} onSave={handleSmallModalSave}/>
             </div>
         </div>
     );
