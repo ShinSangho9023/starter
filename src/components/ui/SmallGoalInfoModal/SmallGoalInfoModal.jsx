@@ -36,13 +36,11 @@ export default function SmallGoalInfoModal(props) {
         bigGoal_number: props.bigGoal_number
     });
 
-
     // 모달 닫기
     const closeModal = () => {
         setIsOpen(false);
         props.closeModal();
     };
-
 
     return (
         <div className={styles.container}>
