@@ -9,15 +9,30 @@ import Card from '@/components/ui/Card'
 import SmallDday from '../ShowSmallGoalDday/ShowSmallGoalDday'
 import SmallGoalModal from '../UpDateModal/UpdateSmallGoalModal/UpdateSmallGoalModal'
 import SmallGoalInfoModal from '../SmallGoalInfoModal/SmallGoalInfoModal'
-
+import ConfirmDialog from '../ConfirmDialog/ConfirmDialog'
 export default function SmallGoal(props) {
     const [SmallGoals, setSmallGoals] = useState(props.SmallGoals || []);
     const [isLoading, setLoading] = useState(true);
     const [SmallGoalId, setSmallGoalId] = useState();
+    
     // 상태로 수정 모달 열기/닫기 상태 랜더링 관리
     const [isOpen, setIsOpen] = useState(false)
+    
     // 정보 모달 랜더링 관리
     const [openinfo, setopeninfo] = useState(false);
+    
+    // 다일로그 삭제모달 열기/닫기 관리 하는 버튼
+    const [dialogIsOpen, setdialogIsOpen] = useState(false);
+    
+    // 다일로그 열기
+    const openDialog = (smallGoalId) => {
+        setdialogIsOpen(true)
+        setSmallGoalId(smallGoalId)
+    }
+    // 다일로그 닫기
+    const onDialogClose = () => {
+        setdialogIsOpen(false)
+    }
 
     // 수정 버튼 클릭 시 모달 열기
     const handleButtonClick = (smallGoalId) => {
@@ -36,7 +51,6 @@ export default function SmallGoal(props) {
         }
     }
 
-    console.log("정보 모달 블룬", openinfo);
 
     // 모달 닫기 함수
     const closeModal = () => {
@@ -88,7 +102,7 @@ export default function SmallGoal(props) {
                 variant="twoTone"
                 color="red-600"
                 icon={<MdDeleteForever />}
-                onClick={() => handleDeleteClick(smallGoalId)}
+                onClick={() => openDialog(smallGoalId)}
             >
                 삭제
             </Button>
@@ -172,6 +186,9 @@ export default function SmallGoal(props) {
                     isOpen={openinfo}
                     closeModal={closeinfoModal}
                 />
+            )}
+            {dialogIsOpen && (
+                <ConfirmDialog dialogIsOpen={dialogIsOpen} onClose={onDialogClose} delete={() => handleDeleteClick(SmallGoalId)} />
             )}
         </div>
     );

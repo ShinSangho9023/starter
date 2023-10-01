@@ -14,15 +14,32 @@ import {
 import { lazy } from 'react'
 import Dday from '../ShowBigGoalDday/ShowBigGoalDday.jsx'
 import BigGoalModal from '../UpDateModal/UpdateBigGoalModal/UpdateBigGoalModal.jsx'
+import ConfirmDialog from '../ConfirmDialog/ConfirmDialog'
+
 
 const BigGoal = (props) => {
     // 상태 변수 정의
     const [BigGoals, setGoals] = useState(props.BigGoals || [])
-    const [isLoading, setLoading] = useState(true) // 로딩 상태를 나타내는 상태 변수
+    const [isLoading, setLoading] = useState(true); // 로딩 상태를 나타내는 상태 변수
     const userId = '신짱구'
     const [BigGoalId, setBigGoalId] = useState();
     // 상태로 모달 열기/닫기 상태 관리
-    const [isOpen, setIsOpen] = useState(false)
+    const [isOpen, setIsOpen] = useState(false);
+
+    // 다일로그 삭제모달 열기/닫기 관리 하는 버튼
+    const [dialogIsOpen, setdialogIsOpen] = useState(false);
+
+    // 다일로그 열기
+    const openDialog = (BigGoalId) => {
+        setdialogIsOpen(true)
+        setBigGoalId(BigGoalId)
+    }
+    // 다일로그 닫기
+    const onDialogClose = () => {
+        console.log('onDialogClose')
+        setdialogIsOpen(false)
+    }
+
 
     // 수정 버튼 클릭 시 모달 열기
     const handleButtonClick = (BigGoalId) => {
@@ -70,7 +87,7 @@ const BigGoal = (props) => {
                 variant="twoTone"
                 color="red-600"
                 icon={<MdDeleteForever />}
-                onClick={() => handleDeleteClick(BigGoalId)}
+                onClick={() => openDialog(BigGoalId)}
             >
                 삭제
             </Button>
@@ -139,16 +156,16 @@ const BigGoal = (props) => {
                                         시작 날짜:{' '}
                                         {goal.bigGoal_startDate
                                             ? new Date(
-                                                  goal.bigGoal_startDate
-                                              ).toLocaleDateString()
+                                                goal.bigGoal_startDate
+                                            ).toLocaleDateString()
                                             : '날짜 없음'}
                                     </p>
                                     <p>
                                         종료 날짜:{' '}
                                         {goal.bigGoal_endDate
                                             ? new Date(
-                                                  goal.bigGoal_endDate
-                                              ).toLocaleDateString()
+                                                goal.bigGoal_endDate
+                                            ).toLocaleDateString()
                                             : '날짜 없음'}
                                     </p>
                                     <p>
@@ -164,8 +181,8 @@ const BigGoal = (props) => {
                     )}
                 </div>
             )}
-             {/* BigGoalModal 컴포넌트를 조건부 렌더링 */}
-             {isOpen && (
+            {/* BigGoalModal 컴포넌트를 조건부 렌더링 */}
+            {isOpen && (
                 <BigGoalModal
                     isOpen={isOpen}
                     closeModal={closeModal}
@@ -173,6 +190,10 @@ const BigGoal = (props) => {
                     props={props}
                 />
             )}
+            {dialogIsOpen && (
+                <ConfirmDialog dialogIsOpen={dialogIsOpen} onClose={onDialogClose} delete={() => handleDeleteClick(BigGoalId)} />
+            )}
+
         </div>
     )
 }
