@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import axios from 'axios';
 import { Button, Input, } from '@/components/ui';
-import styles from './modal.module.css'
+import styles from './InsertBigGoalModal.module.css'
 import DatePicker from '@/components/ui/DatePicker'
 
 const modalStyle = {
@@ -27,10 +27,10 @@ const modalStyle = {
 Modal.setAppElement('#root'); // 모달을 루트 엘리먼트에 연결 스크린 리더가 읽기 편하게 뒷 화면을 잠그는 기능
 
 export default function BigGoalModal(props) {
-  {/* 모달의 열고 닫는 걸 기억 */}
+  {/* 모달의 열고 닫는 걸 기억 */ }
   const [isOpen, setIsOpen] = useState(false);
 
-  {/* 폼의 데이터를 저장 */}
+  {/* 폼의 데이터를 저장 */ }
   const [formData, setFormData] = useState({
     bigGoal_name: '',
     bigGoal_startDate: '',
@@ -38,17 +38,17 @@ export default function BigGoalModal(props) {
     user_id: '신짱구'
   });
 
-  {/* 모달 열림 */}
+  {/* 모달 열림 */ }
   const openModal = () => {
     setIsOpen(true);
   };
 
-  {/* 모달 닫힘 */}
+  {/* 모달 닫힘 */ }
   const closeModal = () => {
     setIsOpen(false);
   };
 
-  {/* 값 입력 될 때 폼 데이터로 저장 */}
+  {/* 값 입력 될 때 폼 데이터로 저장 */ }
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -57,7 +57,7 @@ export default function BigGoalModal(props) {
     });
   };
 
-  {/* 값 입력 될 때 폼 데이터로 저장 */}
+  {/* 값 입력 될 때 폼 데이터로 저장 */ }
   const handleDatePickerChange = (newDate) => {
     // 새 값을 설정한 뒤에 콜백 함수로 상태 업데이트를 진행합니다.
     setFormData((prevData) => ({
@@ -66,7 +66,7 @@ export default function BigGoalModal(props) {
     }));
   };
 
-  {/* 값 입력 될 때 폼 데이터로 저장 */}
+  {/* 값 입력 될 때 폼 데이터로 저장 */ }
   const handleEndDatePickerChange = (newDate) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -89,7 +89,7 @@ export default function BigGoalModal(props) {
     closeModal(); // 모달 닫기
   };
 
-  
+
 
   return (
     <div className={styles.modalContainer}>

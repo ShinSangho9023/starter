@@ -3,6 +3,8 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import { Button, Input } from '@/components/ui';
 import DatePicker from '@/components/ui/DatePicker';
+import styles from './UpdateBigGoalModal.module.css'
+
 
 const modalStyle = {
   overlay: {
@@ -27,7 +29,7 @@ Modal.setAppElement('#root');
 export default function BigGoalModal(props) {
   // 모달의 열고 닫는 상태를 관리
   const [isOpen, setIsOpen] = useState(props.isOpen || false);
-    
+
 
   // 폼 데이터 상태
   const [formData, setFormData] = useState({
@@ -88,47 +90,58 @@ export default function BigGoalModal(props) {
   };
 
   return (
-    <div>
+    <div className={styles.modalWrap}>
+
       <Modal
         isOpen={isOpen}
         onRequestClose={closeModal}
         contentLabel="모달 창"
         style={modalStyle}
       >
-        <h2>대목표를 입력하세요</h2>
-        <form onSubmit={handleSubmit}>
-          <label htmlFor="bigGoal_name">대목표 이름:</label>
-          <Input
-            type="text"
-            id="bigGoal_name"
-            name="bigGoal_name"
-            value={formData.bigGoal_name}
-            onChange={handleChange}
-          />
 
-          <label htmlFor="bigGoal_startDate">시작 날짜:</label>
-          <DatePicker
-            id="bigGoal_startDate"
-            name="bigGoal_startDate"
-            value={formData.bigGoal_startDate}
-            onChange={handleDatePickerChange}
-          />
+        <div className={styles.titleDiv}>
+          <h2 className={styles.title}>수정 값을 입력하세요</h2>
+        </div>
+        <form className={styles.formDiv} onSubmit={handleSubmit}>
 
-          <label htmlFor="bigGoal_endDate">종료 날짜:</label>
-          <DatePicker
-            id="bigGoal_endDate"
-            name="bigGoal_endDate"
-            value={formData.bigGoal_endDate}
-            onChange={handleEndDatePickerChange}
-          />
+          <div className={styles.input}>
+            <label htmlFor="bigGoal_name">대목표 이름:</label>
+            <Input
+              type="text"
+              id="bigGoal_name"
+              name="bigGoal_name"
+              value={formData.bigGoal_name}
+              onChange={handleChange}
+            />
+          </div>
 
-          <Button type="submit" variant="solid">
-            전송
-          </Button>
+          <div className={styles.input}>
+            <label htmlFor="bigGoal_startDate">시작 날짜:</label>
+            <DatePicker
+              id="bigGoal_startDate"
+              name="bigGoal_startDate"
+              value={formData.bigGoal_startDate}
+              onChange={handleDatePickerChange}
+            />
+          </div>
+          <div className={styles.input}>
+            <label htmlFor="bigGoal_endDate">종료 날짜:</label>
+            <DatePicker
+              id="bigGoal_endDate"
+              name="bigGoal_endDate"
+              value={formData.bigGoal_endDate}
+              onChange={handleEndDatePickerChange}
+            />
+          </div>
+          <div className={styles.buttonBox}>
+            <Button type="submit" variant="solid">
+              전송
+            </Button>
 
-          <Button variant="solid" onClick={closeModal}>
-            닫기
-          </Button>
+            <Button variant="solid" onClick={closeModal}>
+              닫기
+            </Button>
+          </div>
         </form>
       </Modal>
     </div>

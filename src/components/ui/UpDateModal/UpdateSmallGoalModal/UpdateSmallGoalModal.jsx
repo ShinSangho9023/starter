@@ -3,29 +3,29 @@ import Modal from 'react-modal';
 import axios from 'axios';
 import { Button, Input } from '@/components/ui';
 import DatePicker from '@/components/ui/DatePicker';
-
+import styles from './UpdateSmallGoalModal.module.css'
 const modalStyle = {
-    overlay: {
-      zIndex: 9999,
-      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    },
-    content: {
-      width: '400px',
-      height: '400px',
-      margin: 'auto',
-      display: 'flex',
-      flexDirection: 'column',
-      justifyContent: 'spaceBetween',
-      alignItems: 'center',
-      padding: '10px',
-      border: 'none',
-    },
-  };
+  overlay: {
+    zIndex: 9999,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  content: {
+    width: '400px',
+    height: '400px',
+    margin: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'spaceBetween',
+    alignItems: 'center',
+    padding: '10px',
+    border: 'none',
+  },
+};
 
-  Modal.setAppElement('#root');
+Modal.setAppElement('#root');
 
 export default function SmallGoalModal(props) {
-  
+
   // 모달의 열고 닫는 상태를 관리
   const [isOpen, setIsOpen] = useState(props.isOpen || false);
   // 폼 데이터 상태
@@ -85,17 +85,21 @@ export default function SmallGoalModal(props) {
     props.closeModal(); // 부모 값 변경
     closeModal(); // 모달 닫기
   };
-  
-    return (
-        <div>
-        <Modal
-          isOpen={isOpen}
-          onRequestClose={closeModal}
-          contentLabel="모달 창"
-          style={modalStyle}
-        >
-          <h2>소목표를 입력하세요</h2>
-          <form onSubmit={handleSubmit}>
+
+  return (
+    <div className={styles.modalWrap}>
+      <Modal
+        isOpen={isOpen}
+        onRequestClose={closeModal}
+        contentLabel="모달 창"
+        style={modalStyle}
+      >
+        <div className={styles.titleDiv}>
+          <h2 className={styles.title}>수정 값을 입력하세요</h2>
+        </div>
+        <form className={styles.formDiv} onSubmit={handleSubmit}>
+
+          <div className={styles.input}>
             <label htmlFor="name">소목표 이름:</label>
             <Input
               type="text"
@@ -104,7 +108,9 @@ export default function SmallGoalModal(props) {
               value={formData.smallGoal_name}
               onChange={handleChange}
             />
-  
+          </div>
+
+          <div className={styles.input}>
             <label htmlFor="name">시작 날짜:</label>
             <DatePicker
               id="name"
@@ -112,7 +118,8 @@ export default function SmallGoalModal(props) {
               value={formData.smallGoal_startDate}
               onChange={handleDatePickerChange}
             />
-  
+          </div>
+          <div className={styles.input}>
             <label htmlFor="name">종료 날짜:</label>
             <DatePicker
               id="name"
@@ -120,16 +127,18 @@ export default function SmallGoalModal(props) {
               value={formData.smallGoal_endDate}
               onChange={handleEndDatePickerChange}
             />
-  
+          </div>
+          <div className={styles.buttonBox}>
             <Button type="submit" variant="solid">
               전송
             </Button>
-  
+
             <Button variant="solid" onClick={closeModal}>
               닫기
             </Button>
-          </form>
-        </Modal>
-      </div>
+          </div>
+        </form>
+      </Modal>
+    </div>
   )
 }

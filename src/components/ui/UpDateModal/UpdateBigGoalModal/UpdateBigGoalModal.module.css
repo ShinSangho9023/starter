@@ -1,0 +1,44 @@
+/* modal.module.css */
+
+.modalContainer {
+    display: flex;
+    justify-content: center;
+}
+.title {
+    
+    font-size: 24px;
+}
+
+.titleDiv {
+   
+}
+
+.formDiv {
+    display: flex; /* Flex 컨테이너로 설정하여 수평 가운데 정렬합니다. */
+    justify-content: center; /* 수평 가운데 정렬 */
+    flex-direction: column;
+    
+    height: 100%;
+}
+
+.input {
+    margin: 10px;
+}
+
+.buttonBox {
+    display: flex;
+    justify-content: space-between;
+    bottom: 0px;
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: 0;
+}
+
+.button {
+    margin-top: auto;
+}
+
+.addButton {
+    margin-top: 60px;
+    margin-bottom: 20px;
+}
